@@ -1,0 +1,138 @@
+
+
+class Promedio(object): #Esta clase es para calcular el promedio en caso que el salario lo en mesee
+    def __init__(self, n):
+        self.n= n #Es la varable que indicara la cantidad de meses a sumar
+        try:
+            self.n = int(input("Ingresa la cantidad de veces que vas a sumar: "))
+            if self.n > 0:
+
+                w=self.n # esta variable esta para almacenar el valor original y no se pierda en el while
+                suma = 0
+                while self.n > 0: # actua en orden de mayor a menor
+
+                    x = int(input("Ingresa el valor{}: ".format(self.n)))
+                    suma = suma + x
+                    self.n = self.n - 1 # Se le resta uno a la cantidad de meses para que sea un bucle infinito
+            else:
+                input("Debe ser un numero positivo")
+            #input(suma)
+            promedio= suma/w
+            input("El promedio del sueldo es {}".format(promedio))
+
+        except:
+            input("Valor incorrecto")
+
+class Suma_Modulos(object):
+    def __init__(self, modulo):
+        self.modulo= modulo
+        try:
+            n2 = int(input("Ingresa la cantidad de veces que vas a sumar: "))
+            if n2 > 0:
+                self.modulo = 0
+                while n2 > 0:  # actua en orden de mayor a menor
+
+                    x2 = int(input("Ingresa el valor{}: ".format(n2)))
+                    self.modulo = self.modulo + x2
+                    n2 = n2 - 1  # Se le resta uno a la cantidad de meses para que sea un bucle infinito
+            else:
+                input("Debe ser un numero positivo")
+            #input(self.modulo)
+        except:
+            input("Has introduciodo un valor incorrecto...")
+
+if __name__ == '__main__':
+    input("\n \n \n Bienvenido")
+    input("Este programa usa la tecnica de descoposicion para calcular el costo de desarrollo de un Software")
+    while True:
+
+        try:
+            op4= input("Tienes la cantidad total de la tarifa laboral? Si o No: ")
+            if op4.lower()== 'si':
+                Tarifa = int((input("Ingresa la tarifa laboral: ")))
+            elif op4.lower()== 'no':
+                try:
+                    n=int(input("Cantidad de meses a ingresar: "))
+                    if n>2:
+                        Promedio(n)
+                        Tarifa = int(input("Escribe el promedio: "))
+                        #Tarifa= Promedio.promedio
+                        input(Tarifa)
+
+                except:
+                    input("El numero igresado no es mayor a 2")
+
+
+
+
+
+            op3 = input("Tienes la cantidad total del sistema? Si o No: ")
+            if op3.lower()== 'no':
+                modulo=int(input("Cantida de modulos: "))
+                Suma_Modulos(modulo)
+                Tamaño = int(input("Tamaño estimado del sistema: "))
+                #Tamaño= Suma_Modulos.modulo
+                input(Tamaño)
+
+            elif op3.lower()== 'si':
+                Tamaño = int(input("Tamaño estimado del sistema: "))
+
+
+            Prod_mediaLDC = int((input("Ingresa la Productividad media al mes: ")))
+            Esfuerzo_Ajus = int((input("Esfuerzo ajustado: ")))
+            """
+            A continuacion se verifican los valores que se han ingresado.
+
+            """
+            if Tarifa > 0 and Tamaño > 0 and Prod_mediaLDC > 0 and Esfuerzo_Ajus > 0:
+                """
+                Se hacen los calculos para resolver el problema y brindar informacion 
+                al usuario.
+                """
+                Costo_LDC = Tarifa / Prod_mediaLDC
+                Costo_SOFT = Costo_LDC * Tamaño
+                Esf_Per_Mes = Costo_SOFT / Tarifa
+                PTPI = Tamaño / Esfuerzo_Ajus
+                PMA = ((Esfuerzo_Ajus * Prod_mediaLDC) / Esf_Per_Mes)
+                Tiempo = PTPI / PMA
+                input("EL costo de la por linea de codigo es de: {}, el valor del software es: {}".format(Costo_LDC, Costo_SOFT))
+                input("La cantidad de personas para el desarrollo deberia ser: {}, La productividad total proyecta individualmente es: {}".format(Esf_Per_Mes, PTPI))
+                input("La productividad media ajusta es: {}, y el tiempo requerido es de: {}".format(PMA, Tiempo))
+
+                """
+                            Se le pregunta al usuario si desea incrementar el PMA
+                            se le hace esta pregunta por si el tiempo no se ajusta a la necesidad del usuario.
+                            """
+
+                try:
+
+                    opcion = input("¿Deseas incrementar porcentualmente la productividad media ajustada? SI o No. Ingrese su respuesta: ")
+
+                    if opcion.lower() == 'si':
+                        try:
+                            porcentaje = int(input("El valor que vas a ingresar debe estar dentro de 1 como minimo y el maxino 100: "))
+                            """
+                            Se verifica el porcentaje y se procede con los calculos
+                            """
+                            if porcentaje >= 1 and porcentaje <= 100:
+                                PMA_ajustado = int(((PMA * porcentaje) / 100) + PMA)
+                                Tiempo2 = int(PTPI / PMA_ajustado)
+                                input("El nuevo tiempo es de: {}".format(Tiempo2))
+
+                        except:
+                            input("El valor ingresado no esta dentro del rango establecido")
+                except:
+                    input("Hemos terminado...")
+        except:
+
+            input("El valor que ha ingresado no es correcto...")
+            input("Verifique que los valores y vuelva a intengtarlo.")
+
+        try:
+            opcion2 = int(input("¿Quieres volver a intengtarlo? 1 para si y 0 para no: "))
+            if opcion2 != 1:
+                break
+        except:
+            input("Respuesta incorrecta... es Si o No")
+            input("Vuelva a intentarlo")
+    input("Hasta luego Lapesillo(a)")
